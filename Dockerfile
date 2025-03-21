@@ -1,4 +1,4 @@
-FROM amd64/ubuntu:latest
+FROM amd64/ubuntu:noble-20250127
 
 # Original Server v436
 ADD files/ut-server-linux-436.tar.gz /

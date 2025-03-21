@@ -1,0 +1,23 @@
+name: Docker Image release
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log in to GCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/ut99-server
+          IMAGE_TAG=$(git describe --tags)
+          docker build -f Dockerfile -t $IMAGE_NAME:$IMAGE_TAG -t $IMAGE_NAME:latest--no-cache .
+          docker push $IMAGE_NAME:$IMAGE_TAG
+          docker push $IMAGE_NAME:latest
+          docker logout
