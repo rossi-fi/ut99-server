@@ -1,9 +1,9 @@
-FROM amd64/ubuntu:noble-20250127
+FROM ubuntu:noble-20250127
 
 # Original Server v436
 ADD files/ut-server-linux-436.tar.gz /
-# Update to 469c
-ADD files/Patches/OldUnreal-UTPatch469d-Linux-x86.tar.bz2 /ut-server/
+# Update to 469e
+ADD https://github.com/OldUnreal/UnrealTournamentPatches/releases/download/v469e-rc7/OldUnreal-UTPatch469e-Linux-amd64.tar.bz2 /ut-server/
 # Fix for broken maps from the original file
 ADD files/Patches/BrokenMapsFix.tar.gz /ut-server/
 # Add the bonus packs
